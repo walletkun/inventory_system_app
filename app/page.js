@@ -4,7 +4,6 @@ import { useEffect, useState, useNavigate} from "react";
 import React from "react"
 import { firestore } from './firebase'; // Adjust the path according to your project structure
 import { collection, doc, getDoc, getDocs, query, setDoc, deleteDoc, updateDoc} from "firebase/firestore";
-import { CssTransition } from "@mui/base";
 import "./animation.css";
 import "./globals.css";
 
@@ -141,7 +140,7 @@ export default function Home() {
             await setDoc(docRef, { quantity: existingQuantity + numericQuantity });
             await updatePantries();
             setAddedItemId(null);
-          }, 1000);
+          }, 100);
         }
       } else {
         // Add new item to pantry
@@ -150,7 +149,7 @@ export default function Home() {
           await setDoc(docRef, { quantity: numericQuantity });
           await updatePantries();
           setAddedItemId(null);
-        }, 1000);
+        }, 100);
       }
     } catch (error) {
       console.error("Error adding pantries: ", error);
@@ -195,6 +194,9 @@ export default function Home() {
   }, []);
 
 
+  const filteredPantry = pantry.filter((item) => 
+    item.id.toLowerCase().includes(searchQuery.toLowerCase())
+);
 
 
   return (
@@ -493,13 +495,14 @@ export default function Home() {
           }
         }}>
           <Grid container spacing={2} justifyContent="center">
+            
             {pantry.filter((item) =>
             item.id.toLowerCase().includes(searchQuery.toLowerCase())
           ).map((item) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
-              <Collapse in={true} timeout={1000}>
+              <Collapse in={true} timeout={200}>
                 <Box
-                  className={`pantry-item ${item.id === addedItemId ? "slideIn" : ""} ${item.id === removedItemId ? "fadeOut" : ""} pantry-item ${item.id === addedItemId ? "fadeIn" : ""} ${item.id === removedItemId ? "fadeOut" : ""}`}
+                  className={`pantry-item ${item.id === addedItemId ? "fadeIn" : ""} ${item.id === removedItemId ? "fadeOut" : ""} pantry-item ${item.id === addedItemId ? "fadeIn" : ""} ${item.id === removedItemId ? "fadeOut" : ""}`}
                   width="100%"
                   height="100px"
                   paddingBottom={2}

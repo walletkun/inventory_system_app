@@ -47,12 +47,12 @@
 
 @keyframes slideIn {
   from {
-    opacity: 0;
-    transform: translateX(50%) !important;
+    opacity: 1;
+    transform: translateY(0) !important;
   }
   to {
-    opacity: 1;
-    transform: translateX(0%) !important;
+    opacity: 0;
+    transform: translateX(-10px) !important;
   }
 }
 
@@ -68,11 +68,11 @@
   
 }
 
-.slideIn{
-  animation: slideIn 1.5s ease;
+.pantry-item.fadeIn{
+  animation: fadeIn 1.5s ease;
 }
 
-.fadeOut{
+.pantry-item.fadeOut{
   animation: fadeOut 1.5s ease;
 }
 
