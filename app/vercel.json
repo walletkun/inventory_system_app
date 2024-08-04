@@ -3,7 +3,17 @@
     "builds": [
       {
         "src": "page.js",
-        "use": "@vercel/static"
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "public"
+        }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/index.html"
       }
     ]
   }
+  
